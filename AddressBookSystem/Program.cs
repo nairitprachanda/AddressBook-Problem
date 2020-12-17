@@ -39,7 +39,11 @@ namespace AddressBookSystem
                         string firstName = Console.ReadLine();
                         Console.WriteLine("Enter Last Name :");
                         string lastName = Console.ReadLine();
-                        Contact temp = new Contact(firstName, lastName, null, null, null, null, 0, 0);
+                        Contact temp = new Contact()
+                        {
+                            FirstName = firstName,
+                            LastName = lastName
+                        };
                         if (addressBook.CheckDuplicateEntry(temp, bookName))
                         {
                             break;
@@ -154,6 +158,11 @@ namespace AddressBookSystem
                         FileIOOperations fileIO = new FileIOOperations();
                         fileIO.WriteToFile(addressBook.addressBookDictionary);
                         fileIO.ReadFromFile();
+                        break;
+                    case 12:
+                        CSVHandler handler = new CSVHandler();
+                        handler.WriteToFile(addressBook.addressBookDictionary);
+                        handler.ReadFromFile();
                         break;
                     case 0:
                         Console.WriteLine("Thank You For Using Address Book System.");

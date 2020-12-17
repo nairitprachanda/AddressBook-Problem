@@ -12,8 +12,18 @@ namespace AddressBookSystem
         private Dictionary<Contact, string> stateDictionary = new Dictionary<Contact, string>();
         public void AddContact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNumber, string bookName)
         {
-            Contact contact = new Contact(firstName, lastName, address, city, state, email, zip, phoneNumber);
-            addressBookDictionary[bookName].addressBook.Add(contact.FirstName, contact);
+            Contact contact = new Contact
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Address = address,
+                City = city,
+                State = state,
+                Email = email,
+                Zip = zip,
+                PhoneNumber = phoneNumber
+            };
+            addressBookDictionary[bookName].addressBook.Add(contact.FirstName + " " + contact.LastName, contact);
             Console.WriteLine("\nAdded Succesfully. \n");
         }
         public void ViewContact(string name, string bookName)
