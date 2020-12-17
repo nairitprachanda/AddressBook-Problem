@@ -121,6 +121,9 @@ namespace AddressBookSystem
                                 break;
                         }
                         break;
+                    case 9:
+                        addressBook.DisplayCountByCityandState();
+                        break;
                     case 0:
                         Console.WriteLine("Thank You For Using Address Book System.");
                         break;
