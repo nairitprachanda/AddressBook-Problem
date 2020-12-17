@@ -1,29 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 namespace AddressBookSystem
 {
-    class AddressBook
+    public class AddressBook : IContacts
     {
         private Dictionary<string, Contact> addressBook = new Dictionary<string, Contact>();
         private Dictionary<string, AddressBook> addressBookDictionary = new Dictionary<string, AddressBook>();
-        public void AddContact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNumber)
+        public void AddContact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNumber, string bookName)
         {
-            Contact contact = new Contact();
-            contact.FirstName = firstName;
-            contact.LastName = lastName;
-            contact.Address = address;
-            contact.City = city;
-            contact.State = state;
-            contact.Email = email;
-            contact.Zip = zip;
-            contact.PhoneNumber = phoneNumber;
-            addressBook.Add(contact.FirstName, contact);
+            Contact contact = new Contact(firstName, lastName, address, city, state, email, zip, phoneNumber);
+            addressBookDictionary[bookName].addressBook.Add(contact.FirstName, contact);
             Console.WriteLine("\nAdded Succesfully. \n");
         }
-        public void ViewContact(string name)
+        public void ViewContact(string name, string bookName)
         {
-            foreach (KeyValuePair<string, Contact> item in addressBook)
+            foreach (KeyValuePair<string, Contact> item in addressBookDictionary[bookName].addressBook)
             {
                 if (item.Key.Equals(name))
                 {
@@ -38,9 +31,9 @@ namespace AddressBookSystem
                 }
             }
         }
-        public void ViewContact()
+        public void ViewContact(string bookName)
         {
-            foreach (KeyValuePair<string, Contact> item in addressBook)
+            foreach (KeyValuePair<string, Contact> item in addressBookDictionary[bookName].addressBook)
             {
                 Console.WriteLine("First Name : " + item.Value.FirstName);
                 Console.WriteLine("Last Name : " + item.Value.LastName);
@@ -52,9 +45,9 @@ namespace AddressBookSystem
                 Console.WriteLine("Phone Number : " + item.Value.PhoneNumber + "\n");
             }
         }
-        public void EditContact(string name)
+        public void EditContact(string name, string bookName)
         {
-            foreach (KeyValuePair<string, Contact> item in addressBook)
+            foreach (KeyValuePair<string, Contact> item in addressBookDictionary[bookName].addressBook)
             {
                 if (item.Key.Equals(name))
                 {
@@ -99,11 +92,11 @@ namespace AddressBookSystem
                 }
             }
         }
-        public void DeleteContact(string name)
+        public void DeleteContact(string name, string bookName)
         {
-            if (addressBook.ContainsKey(name))
+            if (addressBookDictionary[bookName].addressBook.ContainsKey(name))
             {
-                addressBook.Remove(name);
+                addressBookDictionary[bookName].addressBook.Remove(name);
                 Console.WriteLine("\nDeleted Succesfully.\n");
             }
             else
@@ -120,6 +113,25 @@ namespace AddressBookSystem
         public Dictionary<string, AddressBook> GetAddressBook()
         {
             return addressBookDictionary;
+        }
+        public List<Contact> GetListOfDictctionaryKeys(string bookName)
+        {
+            List<Contact> book = new List<Contact>();
+            foreach (var value in addressBookDictionary[bookName].addressBook.Values)
+            {
+                book.Add(value);
+            }
+            return book;
+        }
+        public bool CheckDuplicateEntry(Contact c, string bookName)
+        {
+            List<Contact> book = GetListOfDictctionaryKeys(bookName);
+            if (book.Any(b => b.Equals(c)))
+            {
+                Console.WriteLine("Name already Exists.");
+                return true;
+            }
+            return false;
         }
     }
 }
