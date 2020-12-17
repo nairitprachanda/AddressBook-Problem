@@ -22,6 +22,10 @@ namespace AddressBookSystem
                     bookName = Console.ReadLine();
                     addressBook.AddAddressBook(bookName);
                     break;
+                default:
+                    Console.WriteLine("Invalid Input, Proceeding with default AddressBook");
+                    addressBook.AddAddressBook(bookName);
+                    break;
             }
             do
             {
@@ -146,8 +150,12 @@ namespace AddressBookSystem
                                 break;
                         }
                         break;
+                    case 11:
+                        FileIOOperations fileIO = new FileIOOperations();
+                        fileIO.WriteToFile(addressBook.addressBookDictionary);
+                        fileIO.ReadFromFile();
+                        break;
                     case 0:
-
                         Console.WriteLine("Thank You For Using Address Book System.");
                         break;
                     default:

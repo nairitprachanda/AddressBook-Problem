@@ -6,8 +6,8 @@ namespace AddressBookSystem
 {
     public class AddressBook : IContacts
     {
-        private Dictionary<string, Contact> addressBook = new Dictionary<string, Contact>();
-        private Dictionary<string, AddressBook> addressBookDictionary = new Dictionary<string, AddressBook>();
+        public Dictionary<string, Contact> addressBook = new Dictionary<string, Contact>();
+        public Dictionary<string, AddressBook> addressBookDictionary = new Dictionary<string, AddressBook>();
         private Dictionary<Contact, string> cityDictionary = new Dictionary<Contact, string>();
         private Dictionary<Contact, string> stateDictionary = new Dictionary<Contact, string>();
         public void AddContact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNumber, string bookName)
