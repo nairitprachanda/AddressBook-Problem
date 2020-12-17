@@ -101,7 +101,25 @@ namespace AddressBookSystem
                             {
                                 Console.WriteLine("No such AddressBook found. Try Again.");
                             }
-                        }                        
+                        }
+                        break;
+                    case 8:
+                        Console.WriteLine("Would You Like To \n1.Search by city \n2.Search by state");
+                        int opt = Convert.ToInt32(Console.ReadLine());
+                        switch (opt)
+                        {
+                            case 1:
+                                Console.WriteLine("Enter name of city :");
+                                addressBook.SearchPersonByCity(Console.ReadLine());
+                                break;
+                            case 2:
+                                Console.WriteLine("Enter name of state :");
+                                addressBook.SearchPersonByState(Console.ReadLine());
+                                break;
+                            default:
+                                Console.WriteLine("Invalid Input.Enter 1 or 2");
+                                break;
+                        }
                         break;
                     case 0:
                         Console.WriteLine("Thank You For Using Address Book System.");

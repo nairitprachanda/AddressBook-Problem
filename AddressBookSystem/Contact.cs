@@ -36,5 +36,9 @@ namespace AddressBookSystem
         {
             return HashCode.Combine(FirstName, LastName);
         }
+        public override string ToString()
+        {
+            return "First Name :" + FirstName + "\nLast Name : " + LastName + "\nCity : " + City + "\nState : " + State + "\nEmail : " + Email + "\nZip : " + Zip + "\nPhone Number : " + PhoneNumber + "\n";
+        }
     }
 }
